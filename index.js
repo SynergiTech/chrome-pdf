@@ -13,6 +13,7 @@ const allowedFormats = [
     "A5",
     "A6",
 ];
+const resolve = require('path').resolve;
 
 var args = require('yargs')
     .usage('$0 <command> [args]')
@@ -33,7 +34,12 @@ var args = require('yargs')
     })
     .option('page', {
         describe: 'The page to render',
-        conflicts: ['content'],
+        conflicts: ['content', 'file'],
+        requiresArg: true,
+    })
+    .option('file', {
+        describe: 'The file to render',
+        conflicts: ['content', 'page'],
         requiresArg: true,
     })
     .option('path', {
@@ -201,7 +207,7 @@ var args = require('yargs')
             throw "Unknown command: "+cmd;
         }
 
-        if (!argv.page && !argv.content) {
+        if (!argv.page && !argv.content && !argv.file) {
             throw 'Must specify `page` or `content`';
         }
 
@@ -292,6 +298,10 @@ var generateScreenshotConfig = (args) => {
         }
         if (args.content) {
             location = "data:text/html," + args.content;
+        }
+        if (args.file) {
+            filePath = resolve(args.file);
+            location = 'file:///'+filePath;
         }
 
         await page.goto(location, {waitUntil: args.waitUntil});
