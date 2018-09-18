@@ -312,7 +312,11 @@ var generateScreenshotConfig = (args) => {
         if (args.path) {
             console.log("Output saved to "+args.path);
         } else {
-            process.stdout.write(output);
+            if (process.stdout.isTTY) {
+                console.log(output);
+            } else {
+                process.stdout.write(output);
+            }
         }
 
         await browser.close();
