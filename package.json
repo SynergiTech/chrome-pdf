@@ -1,9 +1,38 @@
 {
-    "dependencies": {
-        "puppeteer": "^1.8.0",
-        "yargs": "^12.0.2"
-    },
-    "bin": {
-        "chrome-pdf": "./index.js",
-    }
+  "name": "chrome-pdf",
+  "version": "0.1.1",
+  "description": "Simple Node wrapper around puppeteer (Chrome headless) to generate PDFs and screenshots from the command line",
+  "main": "index.js",
+  "dependencies": {
+    "puppeteer": "^1.8.0",
+    "yargs": "^12.0.2"
+  },
+  "bin": {
+      "chrome-pdf": "./index.js"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SynergiTech/chrome-pdf.git"
+  },
+  "keywords": [
+    "chrome",
+    "headless",
+    "pdf",
+    "screenshot",
+    "generate",
+    "puppeteer",
+    "cli",
+    "command",
+    "line"
+  ],
+  "author": "SynergiTech",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SynergiTech/chrome-pdf/issues"
+  },
+  "homepage": "https://github.com/SynergiTech/chrome-pdf#readme"
 }
