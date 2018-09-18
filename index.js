@@ -315,12 +315,14 @@ var generateScreenshotConfig = (args) => {
             output = await page.screenshot(generateScreenshotConfig(args));
         }
         if (output === false) {
-            console.log("Unable to generate output");
+            console.error("Unable to generate output");
             process.exit(3);
         }
 
         if (args.path) {
-            console.log("Output saved to "+args.path);
+            if (process.stdout.isTTY) {
+                console.log("Output saved to "+args.path);
+            }
         } else {
             if (process.stdout.isTTY) {
                 console.log(output);
@@ -331,7 +333,7 @@ var generateScreenshotConfig = (args) => {
 
         await browser.close();
     } catch (e) {
-        console.log(e);
+        console.error(e);
         process.exit(1);
     }
 })();
