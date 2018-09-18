@@ -47,7 +47,7 @@ var args = require('yargs')
         requiresArg: true,
     })
     .option('viewport', {
-        describe: 'Specfiy viewport options, e.g., width=1920,height=1080,isMobile=true',
+        describe: 'Specify viewport options, e.g., width=1920,height=1080,isMobile=true',
         requiresArg: true,
         coerce: (arg) => {
             var opts = arg.split(",");
