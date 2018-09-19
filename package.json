@@ -1,6 +1,6 @@
 {
   "name": "chrome-pdf",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Simple Node wrapper around puppeteer (Chrome headless) to generate PDFs and screenshots from the command line",
   "main": "index.js",
   "dependencies": {
