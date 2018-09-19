@@ -262,6 +262,7 @@ var generatePDFConfig = (args) => {
 
     return config;
 };
+
 var generateScreenshotConfig = (args) => {
     var config = {
         type: args.type || 'png',
@@ -284,8 +285,8 @@ var generateScreenshotConfig = (args) => {
 };
 
 (async () => {
-    const browser = await puppeteer.launch();
     try {
+        const browser = await puppeteer.launch();
         const page = await browser.newPage();
 
         if (args.viewport) {
@@ -316,7 +317,7 @@ var generateScreenshotConfig = (args) => {
         }
         if (output === false) {
             console.error("Unable to generate output");
-            process.exit(3);
+            process.exit(1);
         }
 
         if (args.path) {
