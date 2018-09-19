@@ -2,7 +2,7 @@
 ## Install
 Sorry for the required usage of --unsafe-perm ¯\\\_(ツ)\_/¯
 ```
-npm install -g -u --unsafe-perm chrome-pdf
+npm install -g --unsafe-perm chrome-pdf
 ```
 
 ```
