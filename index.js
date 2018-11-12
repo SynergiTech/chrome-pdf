@@ -84,6 +84,11 @@ var args = require('yargs')
             return viewport;
         },
     })
+    .option('debug', {
+        default: false,
+        describe: "Run Chrome with a head and keep the browser open after render",
+        boolean: true,
+    })
     .command('pdf', 'Output content rendered as PDF', function (args) {
         return args
             .option('landscape', {
@@ -229,6 +234,14 @@ var args = require('yargs')
     .argv;
 
 const cmd = args._[0];
+var debug = false;
+if (args.debug) {
+    if (cmd != 'pdf') {
+        debug = true;
+    } else {
+        console.warn("Debug mode incompatible with PDF rendering");
+    }
+}
 
 var generatePDFConfig = (args) => {
     var config = {
@@ -286,7 +299,7 @@ var generateScreenshotConfig = (args) => {
 
 (async () => {
     try {
-        const browser = await puppeteer.launch();
+        const browser = await puppeteer.launch({ headless: !debug });
         const page = await browser.newPage();
 
         if (args.viewport) {
@@ -332,7 +345,9 @@ var generateScreenshotConfig = (args) => {
             }
         }
 
-        await browser.close();
+        if (!debug) {
+            await browser.close();
+        }
     } catch (e) {
         console.error(e);
         process.exit(1);
