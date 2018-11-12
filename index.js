@@ -14,6 +14,7 @@ const allowedFormats = [
     "A6",
 ];
 const resolve = require('path').resolve;
+const fs = require('fs');
 
 var args = require('yargs')
     .usage('$0 <command> [args]')
@@ -109,10 +110,24 @@ var args = require('yargs')
             .option('headerTemplate', {
                 describe: "HTML template for the print header",
                 requiresArg: true,
+                coerce: (val) => {
+                    try {
+                        return fs.readFileSync(val).toString();
+                    } catch (err) {
+                        return val;
+                    }
+                }
             })
             .option('footerTemplate ', {
                 describe: "HTML template for the print footer",
                 requiresArg: true,
+                coerce: (val) => {
+                    try {
+                        return fs.readFileSync(val).toString();
+                    } catch (err) {
+                        return val;
+                    }
+                }
             })
             .option('printBackground', {
                 describe: "Print background graphics",
