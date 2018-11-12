@@ -138,6 +138,7 @@ var args = require('yargs')
                 describe: "Paper ranges to print, e.g., '1-5, 8, 11-13'",
                 default: '',
                 requiresArg: true,
+                type: 'string',
             })
             .option('format', {
                 describe: "Paper format. If set, takes priority over width or height options",
