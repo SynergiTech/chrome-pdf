@@ -228,10 +228,6 @@ var args = require('yargs')
             throw "Unknown command: "+cmd;
         }
 
-        if (!argv.page && !argv.content && !argv.file) {
-            throw 'Must specify `page` or `content`';
-        }
-
         if (argv.scale < 0.1 || argv.scale > 2) {
             throw 'Scale is out of range: must be between 0.1 - 2';
         }
@@ -325,13 +321,32 @@ var generateScreenshotConfig = (args) => {
         var location = null;
         if (args.page) {
             location = args.page;
-        }
-        if (args.content) {
+        } else if (args.content) {
             location = "data:text/html," + args.content;
-        }
-        if (args.file) {
+        } else if (args.file) {
             filePath = resolve(args.file);
-            location = 'file:///'+filePath;
+            location = 'file:///' + filePath;
+        } else {
+            var input = await (async function() {
+                var prom = new Promise((resolve) => {
+                    var input = "";
+
+                    process.stdin.setEncoding('utf8');
+                    process.stdin.on('readable', async () => {
+                        const chunk = process.stdin.read();
+                        if (chunk !== null) {
+                            input += chunk;
+                        }
+                    });
+
+                    process.stdin.on('end', () => {
+                        resolve(input);
+                    });
+                });
+
+                return prom;
+            })();
+            location = "data:text/html," + input;
         }
 
         await page.goto(location, {waitUntil: args.waitUntil});
