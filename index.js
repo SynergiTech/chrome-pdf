@@ -322,7 +322,7 @@ var generateScreenshotConfig = (args) => {
         if (args.page) {
             location = args.page;
         } else if (args.content) {
-            location = 'data:text/html,' + args.content;
+            location = 'data:text/html;base64,' + Buffer.from(args.content).toString('base64');
         } else if (args.file) {
             location = 'file:///' + resolve(args.file);
         } else {
@@ -345,7 +345,7 @@ var generateScreenshotConfig = (args) => {
 
                 return prom;
             })();
-            location = 'data:text/html,' + input;
+            location = 'data:text/html;base64,' + Buffer.from(input).toString('base64');
         }
 
         await page.goto(location, {
