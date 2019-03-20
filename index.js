@@ -28,6 +28,11 @@ var args = require('yargs')
         requiresArg: true,
         describe: 'The media type to emulate'
     })
+    .option('sandbox', {
+        default: true,
+        describe: 'Enable the sandbox',
+        boolean: true,
+    })
     .option('content', {
         describe: 'HTML content to render',
         conflicts: ['page'],
@@ -311,7 +316,15 @@ var generateScreenshotConfig = (args) => {
 
 (async () => {
     try {
-        const browser = await puppeteer.launch({ headless: !debug });
+        var browserArgs = [];
+        if (!args.sandbox) {
+            browserArgs.push('--no-sandbox');
+        }
+
+        const browser = await puppeteer.launch({
+            headless: !debug,
+            args: browserArgs
+        });
         const page = await browser.newPage();
 
         if (args.viewport) {
