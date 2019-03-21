@@ -123,7 +123,7 @@ var args = require('yargs')
                     }
                 }
             })
-            .option('footerTemplate ', {
+            .option('footerTemplate', {
                 describe: 'HTML template for the print footer',
                 requiresArg: true,
                 coerce: (val) => {
