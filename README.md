@@ -1,4 +1,6 @@
 # chrome-pdf
+[![npm](https://img.shields.io/badge/npm-chrome--pdf-green.svg?logo=npm)](https://www.npmjs.com/package/chrome-pdf)
+
 ## Install
 Sorry for the required usage of --unsafe-perm ¯\\\_(ツ)\_/¯
 ```
