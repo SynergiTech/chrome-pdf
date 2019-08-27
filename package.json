@@ -4,14 +4,15 @@
   "description": "Simple Node wrapper around puppeteer (Chrome headless) to generate PDFs and screenshots from the command line",
   "main": "index.js",
   "dependencies": {
-    "eslint": "^5.9.0",
     "puppeteer": "^1.8.0",
     "yargs": "^12.0.2"
   },
   "bin": {
     "chrome-pdf": "./index.js"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^6.2.2"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
