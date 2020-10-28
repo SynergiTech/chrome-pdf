@@ -11,7 +11,7 @@
     "chrome-pdf": "./index.js"
   },
   "devDependencies": {
-    "eslint": "^6.2.2"
+    "eslint": "^7.12.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
